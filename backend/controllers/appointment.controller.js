@@ -26,7 +26,52 @@ module.exports = {
 
     ListAllAppointments: async (req,res,next) => {
         try{
-            const result = await AppointmentModule.find().populate('patientid','firstname').populate('doctorid','firstname specialization');
+            const result = await AppointmentModule.find().populate('patientid','firstname').populate('doctorid','firstname specialization').sort({appointment_date: -1});
+
+            //if(result > 0){
+                res.send({data: result});
+                console.log(result);
+            // }else{
+            //     res.send(JSON.stringify("No record found!!"));
+            // }
+        }catch(err){
+            console.log(err);
+        }
+    },
+
+    ListAllPendingAppointments: async (req,res,next) => {
+        try{
+            const result = await AppointmentModule.find({status:0}).populate('patientid','firstname').populate('doctorid','firstname specialization').sort({appointment_date: -1});
+
+            //if(result > 0){
+                res.send({data: result});
+                console.log(result);
+            // }else{
+            //     res.send(JSON.stringify("No record found!!"));
+            // }
+        }catch(err){
+            console.log(err);
+        }
+    },
+
+    ListAllConfirmAppointments: async (req,res,next) => {
+        try{
+            const result = await AppointmentModule.find({status:1}).populate('patientid','firstname').populate('doctorid','firstname specialization').sort({appointment_date: -1});
+
+            //if(result > 0){
+                res.send({data: result});
+                console.log(result);
+            // }else{
+            //     res.send(JSON.stringify("No record found!!"));
+            // }
+        }catch(err){
+            console.log(err);
+        }
+    },
+
+    ListAllRejectedAppointments: async (req,res,next) => {
+        try{
+            const result = await AppointmentModule.find({status:2}).populate('patientid','firstname').populate('doctorid','firstname specialization').sort({appointment_date: -1});
 
             //if(result > 0){
                 res.send({data: result});

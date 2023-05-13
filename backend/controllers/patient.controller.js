@@ -12,9 +12,9 @@ module.exports = {
             //if(!req.body.firstname){return res.send("No first name")}
             const patient = new PatientModule(req.body); //Constructer to moodel
 
-            if(!req.body.firstname || !req.body.lastname || !req.body.date_of_birth || !req.body.gender || !req.body.contact_number || !req.body.email || !req.body.address)
+            if(!req.body.firstname || !req.body.lastname || !req.body.date_of_birth || !req.body.gender || !req.body.contact_number || !req.body.email || !req.body.address || !req.body.password)
             {
-                return res.send("Please Fill all the fields");
+                return res.send(JSON.stringify("Please Fill all the fields"));
             }
 
             //Generate salt to hash the password
@@ -134,5 +134,19 @@ module.exports = {
                 return res.send('Invalid creadential');
             }
         } catch (err) {console.log("server error")}
-    }
+    },
+
+    countTotalPatient: async (req,resp) => {
+        try{
+            const result = await PatientModule.find().count();
+
+            if(result){
+                resp.send(JSON.stringify(result));
+            }else{
+                resp.send(JSON.stringify("No records found!!"));
+            }
+        }catch(err){
+            console.log(err);
+        }
+    },
 }

@@ -12,5 +12,8 @@ router.get('/CountTotalPatientAppointments',AppointmentController.countTotalPati
 router.get('/CountTotalConfirmAppointments',AppointmentController.countTotalConfirmAppointments);
 router.get('/CountTotalPendingAppointments',AppointmentController.countTotalPendingAppointments);
 router.get('/CountTotalRejectedAppointments',AppointmentController.countTotalRejectedAppointments);
+router.get('/ListAllPendingAppointments',AppointmentController.ListAllPendingAppointments);
+router.get('/ListAllConfirmAppointments',AppointmentController.ListAllConfirmAppointments);
+router.get('/ListAllRejectedAppointments',AppointmentController.ListAllRejectedAppointments);
 
 module.exports = router;

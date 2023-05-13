@@ -57,5 +57,19 @@ module.exports = {
         }catch(err){
             console.log(err);
         }
-    }
+    },
+
+    CountTotalDoctors: async (req,resp) => {
+        try{
+            const result = await DoctorModule.find().count();
+
+            if(result){
+                resp.send(JSON.stringify(result));
+            }else{
+                resp.send(JSON.stringify("No records found!!"));
+            }
+        }catch(err){
+            console.log(err);
+        }
+    },
 }
